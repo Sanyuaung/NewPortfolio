@@ -26,6 +26,8 @@ const getIcon = (icon) => {
       return <Palette className="w-full h-auto" strokeWidth={1.5} />;
     case "experiences":
       return <Palette className="w-full h-auto" strokeWidth={1.5} />;
+    case "certificates":
+      return <Palette className="w-full h-auto" strokeWidth={1.5} />;
     case "contact":
       return <Phone className="w-full h-auto" strokeWidth={1.5} />;
     case "github":

@@ -7,22 +7,24 @@ const item = {
 };
 
 // Replace motion(Link) with motion.div to remove external navigation
-const ProjectLink = motion.div;
+const ExperienceLink = motion.div;
 const ExperienceLayout = ({ name, description, date, demoLink }) => {
   return (
-    <ProjectLink
+    <ExperienceLink
       variants={item}
       // href={demoLink} // disabled
       // target={"_blank"} // disabled
       className=" text-sm md:text-base flex  items-center justify-between w-full relative rounded-lg overflow-hidden p-4 md:p-6 custom-bg"
     >
       <div className="flex items-center justify-center space-x-2">
-        <h2 className="text-foreground">{name}</h2>
-        <p className="text-muted hidden sm:inline-block">{description}</p>
+        <h2 className="text-accent font-semibold">{name}</h2>
+        <p className="text-foreground/80 hidden sm:inline-block">
+          {description}
+        </p>
       </div>
       <div className="self-end flex-1 mx-2 mb-1 bg-transparent border-b border-dashed border-muted" />
-      <p className="text-muted sm:text-foreground">{date}</p>
-    </ProjectLink>
+      <p className="text-accent/80 sm:text-accent">{date}</p>
+    </ExperienceLink>
   );
 };
 
