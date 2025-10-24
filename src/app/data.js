@@ -55,25 +55,11 @@ export const projectsData = [
 ];
 export const experiencesData = [
   {
-    id: 1,
-    name: "Myanmar Oriental Bank",
-    description: "Junior Bank Assistant",
-    date: "18 June 2018 - 10 Feb 2023",
-    demoLink: "https://ecotracker.example.com",
-  },
-  {
-    id: 2,
-    name: "Global Wave Technology",
-    description: "Developer",
-    date: "13 Feb 2023 - 31 May 2023",
-    demoLink: "https://artgalleryonline.example.com",
-  },
-  {
-    id: 3,
-    name: "Secret Code Co.,ltd",
-    description: "Senior PHP Developer",
-    date: "01 June 2023 - 30 Nov 2023",
-    demoLink: "https://budgetplanner.example.com",
+    id: 5,
+    name: "KBZ Bank",
+    description: "Senior Full Stack Software Engineer",
+    date: "17 March 2025 - Present",
+    demoLink: "https://recipefinder.example.com",
   },
   {
     id: 4,
@@ -83,11 +69,25 @@ export const experiencesData = [
     demoLink: "https://healthbeat.example.com",
   },
   {
-    id: 5,
-    name: "KBZ Bank",
-    description: "Senior Full Stack Software Engineer",
-    date: "17 March 2025 - Present",
-    demoLink: "https://recipefinder.example.com",
+    id: 3,
+    name: "Secret Code Co.,ltd",
+    description: "Senior PHP Developer",
+    date: "01 June 2023 - 30 Nov 2023",
+    demoLink: "https://budgetplanner.example.com",
+  },
+  {
+    id: 2,
+    name: "Global Wave Technology",
+    description: "Developer",
+    date: "13 Feb 2023 - 31 May 2023",
+    demoLink: "https://artgalleryonline.example.com",
+  },
+  {
+    id: 1,
+    name: "Myanmar Oriental Bank",
+    description: "Junior Bank Assistant",
+    date: "18 June 2018 - 10 Feb 2023",
+    demoLink: "https://ecotracker.example.com",
   },
 ];
 export const certificatesData = [

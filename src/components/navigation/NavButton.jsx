@@ -1,14 +1,15 @@
 import {
-  Facebook,
-  Github,
   Home,
-  Linkedin,
-  Mail,
-  NotebookText,
-  Palette,
-  Phone,
-  Twitter,
   User,
+  FolderKanban,
+  Briefcase,
+  BadgeCheck,
+  Phone,
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -23,11 +24,11 @@ const getIcon = (icon) => {
     case "about":
       return <User className="w-full h-auto" strokeWidth={1.5} />;
     case "projects":
-      return <Palette className="w-full h-auto" strokeWidth={1.5} />;
+      return <FolderKanban className="w-full h-auto" strokeWidth={1.5} />;
     case "experiences":
-      return <Palette className="w-full h-auto" strokeWidth={1.5} />;
+      return <Briefcase className="w-full h-auto" strokeWidth={1.5} />;
     case "certificates":
-      return <Palette className="w-full h-auto" strokeWidth={1.5} />;
+      return <BadgeCheck className="w-full h-auto" strokeWidth={1.5} />;
     case "contact":
       return <Phone className="w-full h-auto" strokeWidth={1.5} />;
     case "github":
@@ -35,10 +36,9 @@ const getIcon = (icon) => {
     case "linkedin":
       return <Linkedin className="w-full h-auto" strokeWidth={1.5} />;
     case "twitter":
-      return <Mail className="w-full h-auto" strokeWidth={1.5} />;
+      return <Twitter className="w-full h-auto" strokeWidth={1.5} />;
     case "resume":
-      return <NotebookText className="w-full h-auto" strokeWidth={1.5} />;
-
+      return <FileText className="w-full h-auto" strokeWidth={1.5} />;
     default:
       return <Home className="w-full h-auto" strokeWidth={1.5} />;
   }
