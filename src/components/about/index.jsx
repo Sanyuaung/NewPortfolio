@@ -15,13 +15,16 @@ const AboutDetails = () => {
             Mission Control{" "}
           </h2>
           <p className="font-light  text-xs sm:text-sm md:text-base   ">
-            My journey started with curiosity and learning on my own. I’ve
-            worked on web applications, internal reporting systems, and workflow
-            automation, including Microsoft Power Apps and Power Automate, using
-            PHP, Laravel, React, and Node.js. Each project helped me grow and
-            learn new skills. Today, I continue exploring the world of
-            technology, building applications that are useful, reliable, and
-            easy to use.
+            My journey in technology began with curiosity, self-learning, and a
+            strong commitment to continuous improvement. As a Senior FullStack
+            Software Engineer, I have developed and contributed to web
+            applications, internal reporting systems, workflow automation
+            solutions, and business process tools across modern full-stack and
+            cloud-based environments. These experiences have strengthened my
+            ability to analyze requirements, design scalable solutions, solve
+            real-world problems, and deliver practical digital products. Today,
+            I continue to grow by building applications that are reliable,
+            user-friendly, and aligned with business needs.
           </p>
         </ItemLayout>
         <ItemLayout
@@ -55,13 +58,13 @@ const AboutDetails = () => {
             </sub>
           </p>
         </ItemLayout>
-        <ItemLayout
+        {/* <ItemLayout
           className={"col-span-full sm:col-span-6 md:col-span-4 !p-0"}
         >
           <img
             className="w-full h-auto"
             src={`${process.env.NEXT_PUBLIC_GITHUB_STATS_URL}/api/top-langs?username=Sanyuaung&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false`}
-            alt="CodeBucks"
+            alt="SanYuAung"
             loading="lazy"
           />
         </ItemLayout>
@@ -70,16 +73,16 @@ const AboutDetails = () => {
           <img
             className="w-full h-auto"
             src={`${process.env.NEXT_PUBLIC_GITHUB_STATS_URL}/api?username=Sanyuaung&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false`}
-            alt="CodeBucks"
+            alt="SanYuAung"
             loading="lazy"
           />
-        </ItemLayout>
+        </ItemLayout> */}
 
         <ItemLayout className={"col-span-full"}>
           <img
             className="w-full h-auto"
-            src={`https://skillicons.dev/icons?i=appwrite,aws,babel,bootstrap,cloudflare,css,d3,docker,figma,firebase,gatsby,git,github,graphql,html,ipfs,js,jquery,kubernetes,linux,mongodb,mysql,netlify,nextjs,nodejs,npm,postgres,react,redux,replit,sass,supabase,tailwind,threejs,vercel,vite,vscode,yarn`}
-            alt="CodeBucks"
+            src={`https://skillicons.dev/icons?i=angular,ansible,aws,bootstrap,cloudflare,css,django,docker,dotnet,figma,git,github,gitlab,grafana,graphql,heroku,html,jenkins,jquery,js,laravel,linux,mongodb,mysql,nestjs,nextjs,nginx,nodejs,notion,npm,php,postgres,postman,powershell,prisma,react,sass,supabase,tailwind,ts,ubuntu,vercel,vite,vscode,vue,yarn`}
+            alt="SanYuAung"
             loading="lazy"
           />
         </ItemLayout>
@@ -88,7 +91,7 @@ const AboutDetails = () => {
           <img
             className="w-full h-auto"
             src={`${process.env.NEXT_PUBLIC_GITHUB_STREAK_STATS_URL}?user=Sanyuaung&theme=dark&hide_border=true&type=svg&background=EB545400&ring=FEFE5B&currStreakLabel=FEFE5B`}
-            alt="CodeBucks"
+            alt="SanYuAung"
             loading="lazy"
           />
         </ItemLayout>

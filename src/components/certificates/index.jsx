@@ -1,4 +1,6 @@
 "use client";
+import { useEffect } from "react";
+import { Fancybox } from "@fancyapps/ui";
 import { motion } from "framer-motion";
 import CertificateLayout from "./CertificateLayout";
 
@@ -14,6 +16,29 @@ const container = {
 };
 
 const CertificateList = ({ projects }) => {
+  useEffect(() => {
+    Fancybox.bind('[data-fancybox="certificates"]', {
+      compact: false,
+      dragToClose: true,
+      Images: {
+        zoom: true,
+      },
+      Carousel: {
+        Toolbar: {
+          display: {
+            left: [],
+            middle: [],
+            right: ["autoplay", "rotateCCW", "rotateCW", "fullscreen", "toggleFull","close"],
+          },
+        },
+      },
+    });
+
+    return () => {
+      Fancybox.destroy();
+    };
+  }, []);
+
   return (
     <>
       <div className="w-full max-w-6xl px-4 mx-auto mb-8 mt-4 text-center">

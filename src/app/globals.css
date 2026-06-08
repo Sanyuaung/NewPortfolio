@@ -1,3 +1,5 @@
+@import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,6 +21,42 @@
 
   .custom-bg {
     @apply bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm;
+  }
+}
+
+@layer components {
+  .fancybox__container {
+    --fancybox-bg: rgba(8, 8, 8, 0.88);
+    --f-button-width: 42px;
+    --f-button-height: 42px;
+    --f-button-border-radius: 8px;
+    --f-button-color: rgb(var(--accent));
+    --f-button-hover-color: rgb(var(--background));
+    --f-button-bg: rgba(var(--background), 0.7);
+    --f-button-hover-bg: rgb(var(--accent));
+    backdrop-filter: blur(10px);
+  }
+
+  .fancybox__content {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(var(--accent), 0.35),
+      0 24px 80px rgba(0, 0, 0, 0.55);
+  }
+
+  .fancybox__caption {
+    max-width: min(760px, calc(100vw - 32px));
+    margin-inline: auto;
+    color: rgb(var(--foreground));
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .fancybox__caption strong {
+    color: rgb(var(--accent));
+    font-size: 1.05rem;
   }
 }
 

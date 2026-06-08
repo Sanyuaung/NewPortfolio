@@ -1,9 +1,18 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
-import emailjs from "@emailjs/browser";
 import { Toaster, toast } from "sonner";
 import { motion } from "framer-motion";
+import {
+  Facebook,
+  FileText,
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  Send,
+} from "lucide-react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -21,6 +30,49 @@ const item = {
   show: { scale: 1 },
 };
 
+const contactLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=100010599582437",
+    icon: Facebook,
+  },
+  {
+    label: "Gmail",
+    href: "mailto:sanyuaung.ygn.mm@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "Phone",
+    href: "tel:+959788599188",
+    icon: Phone,
+  },
+  {
+    label: "Telegram",
+    href: "https://t.me/San_Yu_Aung",
+    icon: Send,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/SanYuAung/",
+    icon: Linkedin,
+  },
+  // {
+  //   label: "Skype",
+  //   href: "https://join.skype.com/invite/mb2hbOTPgTN2",
+  //   icon: MessageCircle,
+  // },
+  {
+    label: "GitHub",
+    href: "https://github.com/Sanyuaung",
+    icon: Github,
+  },
+  {
+    label: "Resume",
+    href: "https://docs.google.com/document/d/1qdoSzNcjO_g1etzvseIELnX-8TGXc_yqhkcfYYynQDM/edit?usp=sharing",
+    icon: FileText,
+  },
+];
+
 export default function Form() {
   const {
     register,
@@ -28,53 +80,40 @@ export default function Form() {
     formState: { errors },
   } = useForm();
 
-  const sendEmail = (params) => {
+  const sendEmail = async (params) => {
     const toastId = toast.loading("Initiating uplink to UFO...", {
       description: "Encrypting transmission packet",
     });
 
-    // toast.info(
-    //   "Form submissions are demo-only here. Please checkout the final code repo to enable it. If you want to connect you can reach out to me via codebucks27@gmail.com.",
-    //   {
-    //     id: toastId,
-    //   }
-    // );
-
-    // comment out the above toast.info and uncomment the below code to enable emailjs
-
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_SERVICE_ID,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID,
-        params,
-        {
-          publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,
-          limitRate: {
-            throttle: 5000, // you can not send more then 1 email per 5 seconds
-          },
-        }
-      )
-      .then(
-        () => {
-          toast.success("Signal received in orbit!", {
-            id: toastId,
-            description: "We'll beam a reply back shortly.",
-          });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        (error) => {
-          toast.error("Transmission failed — retry after recalibration.", {
-            id: toastId,
-            description: "Galactic interference detected.",
-          });
-        }
-      );
+        body: JSON.stringify(params),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send message.");
+      }
+
+      toast.success("Signal received in orbit!", {
+        id: toastId,
+        description: "We'll beam a reply back shortly.",
+      });
+    } catch (error) {
+      toast.error("Transmission failed — retry after recalibration.", {
+        id: toastId,
+        description: "Galactic interference detected.",
+      });
+    }
   };
 
   const onSubmit = (data) => {
     const templateParams = {
-      title: "New interstellar transmission from portfolio",
-      from_name: data.name,
-      reply_to: data.email,
+      name: data.name,
+      email: data.email,
       message: data.message,
     };
 
@@ -97,6 +136,38 @@ export default function Form() {
         >
           Send Interstellar Transmission
         </motion.h2>
+        <motion.div
+          variants={item}
+          className="custom-bg grid w-full grid-cols-1 gap-4 rounded-md border border-accent/30 p-4 shadow-lg backdrop-saturate-150 sm:grid-cols-[auto_1fr] sm:items-center"
+        >
+          <div className="mx-auto rounded-md border border-accent/40 bg-foreground p-2 shadow-lg shadow-background/30 sm:mx-0">
+            <Image
+              src="/QR.jpeg"
+              alt="Contact QR code"
+              width={128}
+              height={128}
+              className="h-28 w-28 rounded-sm object-cover sm:h-32 sm:w-32"
+            />
+          </div>
+          <div className="grid w-full grid-cols-2 gap-2">
+            {contactLinks.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  href.startsWith("http") ? "noopener noreferrer" : undefined
+                }
+                aria-label={label}
+                title={label}
+                className="group flex h-10 items-center gap-2 rounded-md border border-accent/25 bg-background/35 px-3 text-sm text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/70"
+              >
+                <Icon className="h-4 w-4 shrink-0" strokeWidth={1.8} />
+                <span className="truncate">{label}</span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
         <motion.input
           variants={item}
           type="text"

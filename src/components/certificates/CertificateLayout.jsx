@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import { Eye } from "lucide-react";
 
@@ -7,7 +6,7 @@ const item = {
   hidden: { opacity: 0, y: 100 },
   show: { opacity: 1, y: 0 },
 };
-const CertificateLink = motion(Link);
+const CertificateLink = motion.a;
 const CertificateLayout = ({
   name,
   description,
@@ -20,11 +19,12 @@ const CertificateLayout = ({
     <CertificateLink
       variants={item}
       href={imageSrc}
-      target="_blank"
-      rel="noopener noreferrer"
+      data-fancybox="certificates"
+      data-caption={`<strong>${name}</strong>${description ? `<br />${description}` : ""}`}
+      aria-label={`View ${name} certificate`}
       className={`group w-full flex items-center ${
         compact ? "gap-3 p-3" : "gap-4 md:gap-6 p-4 md:p-5"
-      } relative rounded-xl overflow-hidden custom-bg transition-colors`}
+      } relative rounded-xl overflow-hidden custom-bg transition-colors cursor-pointer`}
     >
       <div
         className={`relative shrink-0 rounded-md overflow-hidden ring-1 ring-accent/40 ring-offset-0 ${
@@ -65,8 +65,9 @@ const CertificateLayout = ({
         )}
       </div>
       {!compact && (
-        <span className="ml-auto text-accent opacity-0 group-hover:opacity-100 transition-opacity flex items-center">
-          <Eye size={18} strokeWidth={2.2} className="" />
+        <span className="ml-auto inline-flex shrink-0 items-center gap-2 rounded-md border border-accent/35 bg-background/30 px-3 py-2 text-xs font-medium uppercase tracking-wide text-accent opacity-100 transition-all group-hover:border-accent/70 group-hover:bg-accent/10 md:opacity-0 md:group-hover:opacity-100">
+          <Eye size={16} strokeWidth={2.2} />
+          {/* View */}
         </span>
       )}
     </CertificateLink>
