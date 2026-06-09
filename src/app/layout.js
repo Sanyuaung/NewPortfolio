@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata = {
   metadataBase: new URL("https://portfolio.sanyuaung.dev"),
   title: {
-    template: "%s | San Yu Aung",
+    template: "%s || San Yu Aung",
     default: "San Yu Aung | Senior FullStack Software Engineer",
   },
   description:
