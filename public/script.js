@@ -8,6 +8,25 @@ document.addEventListener("scroll", function () {
   document.getElementById("progress-bar").style.width = scrollPercentage + "%";
 });
 
+const portfolioSwitcher = document.querySelector(".portfolio-switcher");
+const routeLoadingOverlay = document.getElementById("route-loading-overlay");
+
+if (portfolioSwitcher && routeLoadingOverlay) {
+  portfolioSwitcher.addEventListener("click", function (event) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    event.preventDefault();
+    routeLoadingOverlay.classList.add("is-active");
+    routeLoadingOverlay.setAttribute("aria-hidden", "false");
+
+    window.setTimeout(function () {
+      window.location.href = portfolioSwitcher.href;
+    }, 250);
+  });
+}
+
 function myFunction() {
   var dots = document.getElementById("dots");
   var moreText = document.getElementById("more");
