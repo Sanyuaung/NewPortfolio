@@ -19,38 +19,61 @@ Websites:
 export const projectsData = [
   {
     id: 1,
-    name: "Myanmar Oriental Bank",
-    description: "Junior Bank Assistant",
-    date: "18 June 2018 - 10 Feb 2023",
-    demoLink: "https://ecotracker.example.com",
+    name: "SmartCash",
+    description:
+      "Enterprise-style cash management dashboard with demo account access and a polished sign-in workflow.",
+    date: "Live Demo",
+    demoLink: "https://smart-cash-demo.sanyuaung.dev/",
   },
   {
     id: 2,
-    name: "Global Wave Technology",
-    description: "Developer",
-    date: "13 Feb 2023 - 31 May 2023",
-    demoLink: "https://artgalleryonline.example.com",
+    name: "Pauk-Ka-Ya Voice",
+    description:
+      "Voice interaction app that listens through the microphone and creates a playful speech-driven experience.",
+    date: "Live Demo",
+    demoLink: "https://pauk-ka-ya-voice.sanyuaung.dev/",
   },
   {
     id: 3,
-    name: "Secret Code Co.,ltd",
-    description: "Senior PHP Developer",
-    date: "01 June 2023 - 30 Nov 2023",
-    demoLink: "https://budgetplanner.example.com",
+    name: "Kiro Ninja",
+    description:
+      "Interactive browser demo focused on a fast, lightweight Ninja-themed experience and responsive gameplay UI.",
+    date: "Live Demo",
+    demoLink: "https://kiro-ninja.sanyuaung.dev/",
+    requiresVpn: true,
   },
   {
     id: 4,
-    name: "CHID Bank",
-    description: "Senior Web Developer",
-    date: "26 Dec 2023 - 07 March 2025",
-    demoLink: "https://healthbeat.example.com",
+    name: "Lucky Scratch",
+    description:
+      "Scratch-card style lucky draw demo with instant reveal interaction and a mobile-friendly game flow.",
+    date: "Live Demo",
+    demoLink: "https://lucky-scratch.sanyuaung.dev/",
+    requiresVpn: true,
   },
   {
     id: 5,
-    name: "KBZ Bank",
-    description: "Senior Full Stack Software Engineer",
-    date: "17 March 2025 - Present",
-    demoLink: "https://recipefinder.example.com",
+    name: "TOTP Authentication",
+    description:
+      "Two-factor authentication system for working with time-based one-time password flows.",
+    date: "Live Demo",
+    demoLink: "https://totp.sanyuaung.dev/",
+  },
+  {
+    id: 6,
+    name: "SmartFlowMaster",
+    description:
+      "Intelligent workflow engine for managing definitions, states, behaviors, and active task instances.",
+    date: "Live Demo",
+    demoLink: "https://smartflowmaster.sanyuaung.dev/",
+  },
+  {
+    id: 7,
+    name: "Chat Hub",
+    description:
+      "Real-time chat application built for live messaging with a modern web interface.",
+    date: "Live Demo",
+    demoLink: "https://chat-hub.sanyuaung.dev/",
   },
 ];
 export const experiencesData = [
@@ -59,6 +82,8 @@ export const experiencesData = [
     name: "KBZ Bank",
     description: "Senior Full Stack Software Engineer",
     date: "17 March 2025 - Present",
+    details:
+      "Maintain existing systems, develop new features, integrate modern technologies and APIs, and collaborate with cross-functional teams to improve internal portals and user experience.",
     demoLink: "https://recipefinder.example.com",
   },
   {
@@ -66,6 +91,18 @@ export const experiencesData = [
     name: "CHID Bank",
     description: "Senior Web Developer",
     date: "26 Dec 2023 - 07 March 2025",
+    details:
+      "Developed and enhanced banking websites, CMS features, and internal reporting portals while maintaining and upgrading existing web systems.",
+    links: [
+      {
+        label: "Website",
+        href: "https://www.chid.com.mm/",
+      },
+      {
+        label: "Portal",
+        href: "https://popbg.chid.com.mm/",
+      },
+    ],
     demoLink: "https://healthbeat.example.com",
   },
   {
@@ -73,6 +110,8 @@ export const experiencesData = [
     name: "Secret Code Co.,ltd",
     description: "Senior PHP Developer",
     date: "01 June 2023 - 30 Nov 2023",
+    details:
+      "Maintained, developed, and upgraded web and mobile e-commerce applications, including admin, agent, and merchant panel functionality delivered with team collaboration.",
     demoLink: "https://budgetplanner.example.com",
   },
   {
@@ -80,6 +119,8 @@ export const experiencesData = [
     name: "Global Wave Technology",
     description: "Developer",
     date: "13 Feb 2023 - 31 May 2023",
+    details:
+      "Contributed across multiple projects by maintaining, developing, upgrading, and creating application features while supporting team delivery timelines.",
     demoLink: "https://artgalleryonline.example.com",
   },
   {
@@ -87,6 +128,20 @@ export const experiencesData = [
     name: "Myanmar Oriental Bank",
     description: "Junior Bank Assistant",
     date: "18 June 2018 - 10 Feb 2023",
+    details:
+      "Designed and built an internal Laravel reporting portal to streamline card settlement data presentation and improve organizational reporting efficiency.",
+    links: [
+      {
+        label: "Flow PDF",
+        href: "/certificates/MOB Card Settlement Internal Reporting Portal Flow.pdf",
+        modal: true,
+      },
+      {
+        label: "Demo Video",
+        href: "/certificates/MOB Card Settlement Internal Reporting Portal.mp4",
+        modal: true,
+      },
+    ],
     demoLink: "https://ecotracker.example.com",
   },
 ];
