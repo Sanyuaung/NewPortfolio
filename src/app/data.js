@@ -19,6 +19,14 @@ Websites:
 export const projectsData = [
   {
     id: 1,
+    name: "Smart Attendance",
+    description:
+      "Attendance management web app focused on streamlined tracking and daily monitoring workflows.",
+    date: "Live Demo",
+    demoLink: "https://smart-attendance.sanyuaung.dev/",
+  },
+  {
+    id: 2,
     name: "SmartCash",
     description:
       "Enterprise-style cash management dashboard with demo account access and a polished sign-in workflow.",
@@ -26,7 +34,23 @@ export const projectsData = [
     demoLink: "https://smart-cash-demo.sanyuaung.dev/",
   },
   {
-    id: 2,
+    id: 3,
+    name: "SmartFlowMaster",
+    description:
+      "Intelligent workflow engine for managing definitions, states, behaviors, and active task instances.",
+    date: "Live Demo",
+    demoLink: "https://smartflowmaster.sanyuaung.dev/",
+  },
+  {
+    id: 4,
+    name: "TOTP Authentication",
+    description:
+      "Two-factor authentication system for working with time-based one-time password flows.",
+    date: "Live Demo",
+    demoLink: "https://totp.sanyuaung.dev/",
+  },
+  {
+    id: 5,
     name: "Pauk-Ka-Ya Voice",
     description:
       "Voice interaction app that listens through the microphone and creates a playful speech-driven experience.",
@@ -34,16 +58,7 @@ export const projectsData = [
     demoLink: "https://pauk-ka-ya-voice.sanyuaung.dev/",
   },
   {
-    id: 3,
-    name: "Kiro Ninja",
-    description:
-      "Interactive browser demo focused on a fast, lightweight Ninja-themed experience and responsive gameplay UI.",
-    date: "Live Demo",
-    demoLink: "https://kiro-ninja.sanyuaung.dev/",
-    requiresVpn: true,
-  },
-  {
-    id: 4,
+    id: 6,
     name: "Lucky Scratch",
     description:
       "Scratch-card style lucky draw demo with instant reveal interaction and a mobile-friendly game flow.",
@@ -52,28 +67,21 @@ export const projectsData = [
     requiresVpn: true,
   },
   {
-    id: 5,
-    name: "TOTP Authentication",
-    description:
-      "Two-factor authentication system for working with time-based one-time password flows.",
-    date: "Live Demo",
-    demoLink: "https://totp.sanyuaung.dev/",
-  },
-  {
-    id: 6,
-    name: "SmartFlowMaster",
-    description:
-      "Intelligent workflow engine for managing definitions, states, behaviors, and active task instances.",
-    date: "Live Demo",
-    demoLink: "https://smartflowmaster.sanyuaung.dev/",
-  },
-  {
     id: 7,
     name: "Chat Hub",
     description:
       "Real-time chat application built for live messaging with a modern web interface.",
     date: "Live Demo",
     demoLink: "https://chat-hub.sanyuaung.dev/",
+  },
+  {
+    id: 8,
+    name: "Kiro Ninja",
+    description:
+      "Interactive browser demo focused on a fast, lightweight Ninja-themed experience and responsive gameplay UI.",
+    date: "Live Demo",
+    demoLink: "https://kiro-ninja.sanyuaung.dev/",
+    requiresVpn: true,
   },
 ];
 export const experiencesData = [
