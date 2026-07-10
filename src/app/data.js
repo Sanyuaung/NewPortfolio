@@ -42,6 +42,23 @@ export const projectsData = [
     demoLink: "https://smartflowmaster.sanyuaung.dev/",
   },
   {
+    id: 9,
+    name: "Magic Pay",
+    description:
+      "Digital payment platform with separate User Panel and Admin Panel for secure transactions and operational management.",
+    date: "Live Demo",
+    links: [
+      {
+        label: "User Login",
+        href: "https://magicpay.sanyuaung.dev/login",
+      },
+      {
+        label: "Admin Login",
+        href: "https://magicpay.sanyuaung.dev/admin/login",
+      },
+    ],
+  },
+  {
     id: 4,
     name: "TOTP Authentication",
     description:
