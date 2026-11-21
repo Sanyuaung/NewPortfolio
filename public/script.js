@@ -21,9 +21,9 @@ if (portfolioSwitcher && routeLoadingOverlay) {
     routeLoadingOverlay.classList.add("is-active");
     routeLoadingOverlay.setAttribute("aria-hidden", "false");
 
-    window.setTimeout(function () {
-      window.location.href = portfolioSwitcher.href;
-    }, 250);
+    window.requestAnimationFrame(function () {
+      window.location.assign(portfolioSwitcher.href);
+    });
   });
 }
 
@@ -117,60 +117,250 @@ QR.addEventListener("click", function (event) {
   });
 });
 
-let words = document.querySelectorAll(".word");
+const words = document.querySelectorAll(".word");
+const roleContainer = document.querySelector(".animated-words");
+const reduceRoleMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+let roleDustField = null;
+
+if (roleContainer && words.length) {
+  roleDustField = document.createElement("span");
+  roleDustField.className = "role-dust-field";
+  roleDustField.setAttribute("aria-hidden", "true");
+  roleContainer.append(roleDustField);
+}
+
 words.forEach((word, wordIndex) => {
-  let letters = word.textContent.split("");
+  const parts = word.textContent.replace(/\u00a0/g, " ").split(/(\s+)/);
   word.textContent = "";
-  letters.forEach((letter) => {
-    let span = document.createElement("span");
-    span.textContent = letter;
-    span.className = wordIndex === 0 ? "letter in" : "letter behind";
-    word.append(span);
+  parts.forEach((part) => {
+    if (/^\s+$/.test(part)) {
+      word.append(document.createTextNode(part));
+      return;
+    }
+
+    const wordPart = document.createElement("span");
+    wordPart.className = "role-word";
+    part.split("").forEach((letter) => {
+      const span = document.createElement("span");
+      span.textContent = letter;
+      span.className = wordIndex === 0 ? "letter in" : "letter behind";
+      wordPart.append(span);
+    });
+    word.append(wordPart);
   });
   word.style.opacity = wordIndex === 0 ? "1" : "0";
 });
 
 let currentWordIndex = 0;
-let maxWordIndex = words.length - 1;
+const maxWordIndex = words.length - 1;
+const roleDustColors = ["#c6dce4", "#76c6d5", "#d08a6a", "#e8e5d9"];
 
-let changeText = () => {
-  let currentWord = words[currentWordIndex];
-  let nextword =
-    currentWordIndex === maxWordIndex ? words[0] : words[currentWordIndex + 1];
-  currentWord.style.opacity = "1";
+function emitRoleDust(letter, containerRect) {
+  if (!roleDustField || !letter.textContent.trim()) return;
 
-  Array.from(currentWord.children).forEach((letter, i) => {
-    setTimeout(() => {
-      letter.className = "letter out";
-    }, i * 80);
+  const rect = letter.getBoundingClientRect();
+  const particleCount = 2 + Math.floor(Math.random() * 3);
+
+  for (let i = 0; i < particleCount; i += 1) {
+    const particle = document.createElement("span");
+    const size = 1.5 + Math.random() * 2.8;
+    const driftX = 16 + Math.random() * 52;
+    const driftY = (Math.random() - 0.44) * 66;
+    const delay = Math.random() * 300;
+    particle.className = "role-dust-particle";
+    particle.style.left = `${rect.left - containerRect.left + Math.random() * rect.width}px`;
+    particle.style.top = `${rect.top - containerRect.top + Math.random() * rect.height}px`;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.backgroundColor =
+      roleDustColors[Math.floor(Math.random() * roleDustColors.length)];
+    particle.style.setProperty("--dust-x", `${driftX}px`);
+    particle.style.setProperty("--dust-y", `${driftY}px`);
+    particle.style.setProperty("--dust-rotate", `${Math.random() * 220 - 110}deg`);
+    roleDustField.append(particle);
+
+    window.setTimeout(() => particle.classList.add("is-flying"), 16 + delay);
+    window.setTimeout(() => particle.remove(), 2000 + delay);
+  }
+}
+
+function changeText() {
+  if (words.length < 2) return;
+
+  const currentWord = words[currentWordIndex];
+  const nextWord = words[currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1];
+  const containerRect = roleContainer.getBoundingClientRect();
+  const currentLetters = currentWord.querySelectorAll(".letter");
+  const nextLetters = nextWord.querySelectorAll(".letter");
+
+  if (!reduceRoleMotion) {
+    currentLetters.forEach((letter) => {
+      const driftX = 12 + Math.random() * 38;
+      const driftY = (Math.random() - 0.55) * 32;
+      const delay = Math.random() * 300;
+      emitRoleDust(letter, containerRect);
+      letter.style.setProperty("--dust-x", `${driftX}px`);
+      letter.style.setProperty("--dust-y", `${driftY}px`);
+      letter.style.setProperty("--dust-rotate", `${Math.random() * 30 - 15}deg`);
+      letter.style.setProperty("--dust-delay", `${delay}ms`);
+      letter.className = "letter dusting";
+    });
+  } else {
+    currentLetters.forEach((letter) => {
+      letter.className = "letter behind";
+    });
+  }
+
+  nextWord.style.opacity = "1";
+  nextLetters.forEach((letter, index) => {
+    letter.style.setProperty("--role-in-delay", `${Math.min(index * 16, 420)}ms`);
+    letter.className = reduceRoleMotion ? "letter in" : "letter materialize";
   });
 
-  nextword.style.opacity = "1";
-  Array.from(nextword.children).forEach((letter, i) => {
-    letter.className = "letter behind";
-    setTimeout(
-      () => {
-        letter.className = "letter in";
-      },
-      340 + i * 80,
-    );
+  window.setTimeout(() => {
+    currentWord.style.opacity = "0";
+    currentLetters.forEach((letter) => {
+      letter.className = "letter behind";
+    });
+    nextLetters.forEach((letter) => {
+      letter.className = "letter in";
+    });
+  }, reduceRoleMotion ? 0 : 1800);
+
+  currentWordIndex = currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
+}
+
+if (words.length > 1) window.setInterval(changeText, 7000);
+
+const rainCanvas = document.querySelector(".hero-atmosphere__rain");
+const rainContext = rainCanvas?.getContext("2d", { alpha: true });
+
+if (rainCanvas && rainContext && !reduceRoleMotion) {
+  let rainWidth = 0;
+  let rainHeight = 0;
+  let rainScale = 1;
+  let rainDrops = [];
+  let rainFrame = 0;
+  let previousRainFrame = 0;
+
+  function makeRainDrop(initial = false) {
+    const depth = Math.random();
+    return {
+      depth,
+      x: Math.random() * rainWidth,
+      y: initial ? Math.random() * rainHeight : -Math.random() * rainHeight * 0.24,
+      length: 7 + depth * 18,
+      speed: 420 + depth * 1000,
+      width: 0.35 + depth * 0.9,
+      opacity: 0.035 + depth * 0.12,
+      slant: 0.08 + depth * 0.22,
+    };
+  }
+
+  function resizeRain() {
+    const bounds = rainCanvas.getBoundingClientRect();
+    rainWidth = bounds.width;
+    rainHeight = bounds.height;
+    rainScale = Math.min(window.devicePixelRatio || 1, 1.5);
+    rainCanvas.width = Math.round(rainWidth * rainScale);
+    rainCanvas.height = Math.round(rainHeight * rainScale);
+    rainContext.setTransform(rainScale, 0, 0, rainScale, 0, 0);
+    rainContext.lineCap = "round";
+
+    const dropCount = Math.max(70, Math.min(320, Math.round(rainWidth * 0.16)));
+    rainDrops = Array.from({ length: dropCount }, () => makeRainDrop(true));
+  }
+
+  function drawRain(timestamp) {
+    if (document.hidden) {
+      rainFrame = 0;
+      return;
+    }
+
+    const delta = previousRainFrame
+      ? Math.min((timestamp - previousRainFrame) / 1000, 0.05)
+      : 0.016;
+    previousRainFrame = timestamp;
+    rainContext.clearRect(0, 0, rainWidth, rainHeight);
+
+    const gust = Math.sin(timestamp * 0.00012) * 42 + Math.sin(timestamp * 0.00033) * 18;
+    rainDrops.forEach((drop, index) => {
+      drop.x += (55 + gust + drop.depth * 90) * delta;
+      drop.y += drop.speed * delta;
+
+      if (drop.y > rainHeight + drop.length || drop.x > rainWidth + drop.length * 2) {
+        rainDrops[index] = makeRainDrop(false);
+        return;
+      }
+
+      rainContext.beginPath();
+      rainContext.moveTo(drop.x, drop.y);
+      rainContext.lineTo(drop.x + drop.length * drop.slant, drop.y + drop.length);
+      rainContext.lineWidth = drop.width;
+      rainContext.strokeStyle = `rgba(194, 220, 232, ${drop.opacity})`;
+      rainContext.stroke();
+    });
+
+    rainFrame = window.requestAnimationFrame(drawRain);
+  }
+
+  function startRain() {
+    if (!rainFrame) {
+      previousRainFrame = 0;
+      rainFrame = window.requestAnimationFrame(drawRain);
+    }
+  }
+
+  function stopRain() {
+    if (rainFrame) window.cancelAnimationFrame(rainFrame);
+    rainFrame = 0;
+    rainContext.clearRect(0, 0, rainWidth, rainHeight);
+  }
+
+  resizeRain();
+  startRain();
+  window.addEventListener("resize", resizeRain, { passive: true });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopRain();
+    else startRain();
   });
+}
 
-  setTimeout(
-    () => {
-      currentWord.style.opacity = "0";
-      Array.from(currentWord.children).forEach((letter) => {
-        letter.className = "letter behind";
-      });
-    },
-    currentWord.children.length * 80 + 420,
-  );
+const lightningBolt = document.querySelector(".hero-atmosphere__lightning");
+const lightningGlow = document.querySelector(".hero-atmosphere__flash");
 
-  currentWordIndex =
-    currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
-};
+if (lightningBolt && lightningGlow && !reduceRoleMotion) {
+  let lightningTimer = 0;
 
-setInterval(changeText, 4000);
+  function triggerLightning() {
+    const drift = `${(Math.random() - 0.5) * 34}px`;
+    const angle = `${(Math.random() - 0.5) * 7}deg`;
+    const widthScale = (0.88 + Math.random() * 0.24).toFixed(2);
+    lightningBolt.style.transform = `translate3d(${drift}, 0, 0) rotate(${angle}) scaleX(${widthScale})`;
+
+    [lightningGlow, lightningBolt].forEach((layer) => {
+      layer.classList.remove("is-flashing");
+      void layer.getBoundingClientRect();
+      layer.classList.add("is-flashing");
+    });
+  }
+
+  function scheduleLightning(delay = 2800 + Math.random() * 5000) {
+    window.clearTimeout(lightningTimer);
+    lightningTimer = window.setTimeout(() => {
+      if (!document.hidden) triggerLightning();
+      scheduleLightning(7600 + Math.random() * 10800);
+    }, delay);
+  }
+
+  scheduleLightning();
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) window.clearTimeout(lightningTimer);
+    else scheduleLightning(2200 + Math.random() * 4800);
+  });
+}
 
 const circles = document.querySelectorAll(".circle");
 circles.forEach((elem) => {

@@ -9,7 +9,7 @@ import { useFrame } from "@react-three/fiber";
 
 // Re-purpose Wizard component to load space.glb
 const Wizard = React.memo(function SpaceModel(props) {
-  const { nodes, materials } = useGLTF("/models/space.glb");
+  const { nodes, materials } = useGLTF("/models/space-optimized-v1.glb");
   const groupRef = useRef();
 
   // Collect mesh nodes
@@ -70,4 +70,4 @@ const Wizard = React.memo(function SpaceModel(props) {
 });
 
 export default Wizard;
-useGLTF.preload("/models/space.glb");
+useGLTF.preload("/models/space-optimized-v1.glb");

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import bg from "../../public/background/home.jpg";
+import bg from "../../public/background/home-modern.webp";
 import RenderModel from "@/components/RenderModel";
 import Navigation from "@/components/navigation";
 import ClassicPortfolioSwitcher from "@/components/ClassicPortfolioSwitcher";

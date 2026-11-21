@@ -5,5 +5,15 @@ export const metadata = {
 };
 
 export default function ModernPortfolio() {
-  return <ModernPortfolioHome />;
+  return (
+    <>
+      <link
+        rel="preload"
+        href="/models/space-optimized-v1.glb"
+        as="fetch"
+        crossOrigin="anonymous"
+      />
+      <ModernPortfolioHome />
+    </>
+  );
 }
